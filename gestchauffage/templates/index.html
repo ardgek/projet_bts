@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <title>| Page d'accueil |</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../static/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="../static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../static/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../static/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../static/build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="nav-md">
+      <div class="container body">
+        <div class="main_container">
+          <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+              <div class="navbar nav_title" style="border: 0;">
+                <a href="index" class="site_title"><i class="fa fa-group"></i> <span>Bienvenue!</span></a>
+              </div>
+            <!-- Information du profile -->
+            <div class="profile clearfix">
+                <div class="profile_pic">
+                  <img src="../static/images/gerez.jpg" class="img-thumbnail profile_img">
+                </div>
+              <div class="profile_info">
+                <span>Vous êtes sur le profil:</span>
+                <h2>Gerez Quentin</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Menu <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="index">Accueil</a></li>
+                      <li><a href="index2.html">Consigne de température</a></li>
+                      <li><a href="index3.html">Gestion Alarme</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+        <!-- top navigation -->
+        <div id ="temp" class="top_nav">
+          <div class="nav_menu">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <nav class="nav navbar-nav">
+              <ul class=" navbar-right">
+                <li class="nav-item dropdown open" style="padding-left: 15px;">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"></a>
+                  <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item"  href="logout"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- Affichage des temperature en temps reel -->
+        <div id = "temp_rooms" class="right_col" role="main">
+            <div class="row" style="display: inline-block;" >
+          <div class="tile_count">
+            <div id = "temp_room" class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-tv"></i> Séjour </span>
+              <div  class="count"><div id="temp_sejour"></div></div>
+              <span class="count_bottom"><i></i> Consommation : 3 000 W</span>
+                <div id = "sejour_off" class="card bg-danger text-white shadow">
+                    <div id="state_off" class="text-center">OFF</div>
+                </div>
+                <div id = "sejour_on" class="card bg-success text-white shadow">
+                    <div id="state_on" class="text-center">ON</div>
+                </div>
+            </div>
+            <div id = "temp_bedroom1" class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-bed"></i> Chambre 1</span>
+              <div  class="count"><div id="temp_chambre"></div></div>
+              <span class="count_bottom"><i></i> Consommation : 1 000 W</span>
+                <div id = "chambre1_off" class="card bg-danger text-white shadow">
+                    <div id="state_off_chambre1" class="text-center">OFF</div>
+                </div>
+                <div id = "chambre1_on" class="card bg-success text-white shadow">
+                    <div id="state_on_chambre1" class="text-center">ON</div>
+                </div>
+            </div>
+            <div id = "temp_bedroom2" class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-bed"></i> Chambre 2</span>
+              <div  class="count"><div id="temp_chambre2"></div></div>
+              <span class="count_bottom"><i></i> Consommation : 1 000 W</span>
+                <div id = "chambre2_off" class="card bg-danger text-white shadow">
+                    <div id="state_off_chambre2" class="text-center">OFF</div>
+                </div>
+                <div id = "chambre2_on" class="card bg-success text-white shadow">
+                    <div id="state_on_chambre2" class="text-center">ON</div>
+                </div>
+            </div>
+            <div id = "temp_bedroom3" class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-bed"></i> Chambre 3</span>
+              <div  class="count"><div id="temp_chambre3"></div></div>
+              <span class="count_bottom"><i> </i> Consommation : 1 000 W</span>
+                <div id = "chambre3_off" class="card bg-danger text-white shadow">
+                    <div id="state_off_chambre3" class="text-center">OFF</div>
+                </div>
+                <div id = "chambre3_on" class="card bg-success text-white shadow">
+                    <div id="state_on_chambre3" class="text-center">ON</div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-cutlery"></i> Cuisine</span>
+              <div id = "temp_kitchen" class="count"><div id="temp_cuisine"></div></div>
+              <span class="count_bottom"><i> </i>Consommation : 1 000 W</span>
+                <div id = "cuisine_off" class="card bg-danger text-white shadow">
+                    <div id="state_off_cuisine" class="text-center">OFF</div>
+                </div>
+                <div id = "cuisine_on" class="card bg-success text-white shadow">
+                    <div id="state_on_cuisine" class="text-center">ON</div>
+                </div>
+            </div>
+
+              <div class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-car"></i> Garage</span>
+              <div id ="temp_ga" class="count"><div id="temp_garage"></div></div>
+              <span class="count_bottom"></i> </i> Pas de consommation</span>
+                  <div id = "garage_out" class="card bg-warning text-white shadow">
+                    <div id="state_garage" class="text-center">Pas de radiateur</div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-cloud"></i> Exterieur</span>
+              <div id = temp_ext" class="count">{{temp1}}°C</div>
+              <span class="count_bottom"><i></i>Pas de consommation</span>
+                <div id = "exterieur" class="card bg-warning text-white shadow">
+                    <div id="state_exterieur" class="text-center">Pas de radiateur</div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+        <!--Ajax-->
+
+         <script>
+             setInterval('load_room()', 2000);
+             function load_room(){
+                var xhr = new XMLHttpRequest();
+                   xhr.onload = function(){
+                       if (xhr.status >= 200 && xhr.status < 300){
+                           console.log(JSON.stringify(xhr.responseText));
+                           data = JSON.parse(xhr.responseText);
+                           document.getElementById("temp_sejour").innerHTML = data.temp1;
+                           document.getElementById("temp_chambre").innerHTML = data.temp2;
+                           document.getElementById("temp_chambre2").innerHTML = data.temp3;
+                           document.getElementById("temp_chambre3").innerHTML = data.temp4;
+                           document.getElementById("temp_garage").innerHTML = data.temp6;
+                           document.getElementById("temp_cuisine").innerHTML = data.temp5;
+                        } else{
+                            console.log(JSON.parse(xhr.responseText));
+                        }
+                    };
+             xhr.open('GET', '/temp_rooms');
+             xhr.send();
+             }
+         </script>
+
+            <!-- Graphique chambre 1 -->
+          <div class="container">
+              <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="chambre_1"></canvas>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+        <script>
+    $(document).ready(function ()
+    {
+        const config = {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets : [
+                {
+                    label: "Sejour",
+                    backgroundColor: 'rgb(255,181,51)',
+                    borderColor: 'rgb(255,181,51)',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Chambre 1",
+                    backgroundColor: 'rgb(82,255,51)',
+                    borderColor: 'rgb(82,255,51)',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Chambre 2",
+                    backgroundColor: 'rgb(30,144,255)',
+                    borderColor: 'rgb(30,144,255)',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Chambre 3",
+                    backgroundColor: 'rgb(255,0,0)',
+                    borderColor: 'rgb(255,0,0)',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Garage",
+                    backgroundColor: 'rgb(238,130,238)',
+                    borderColor: 'rgb(238,130,238)',
+                    data: [],
+                    fill: false,
+                },
+                {
+                    label: "Cuisine",
+                    backgroundColor: 'rgb(0,0,0)',
+                    borderColor: 'rgb(0,0,0)',
+                    data: [],
+                    fill: false,
+                },
+                ],
+            },
+            options:
+            {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Suivie de la Maison'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                        }
+                    }]
+                }
+
+            }
+        };
+
+        const context = document.getElementById('chambre_1').getContext('2d');
+
+        const lineChart = new Chart(context, config);
+
+        const source = new EventSource("/sejour");
+
+        source.onmessage = function (event)
+        {
+            const data = JSON.parse(event.data);
+            if (config.data.labels.length === 20)
+            {
+                config.data.labels.shift();
+                config.data.datasets[0].data.shift();
+                config.data.datasets[1].data.shift();
+                config.data.datasets[2].data.shift();
+                config.data.datasets[3].data.shift();
+                config.data.datasets[4].data.shift();
+                config.data.datasets[5].data.shift();
+            }
+            config.data.labels.push(data.time);
+            config.data.datasets[0].data.push(data.temp1);
+            config.data.datasets[1].data.push(data.temp2);
+            config.data.datasets[2].data.push(data.temp3);
+            config.data.datasets[3].data.push(data.temp4);
+            config.data.datasets[5].data.push(data.temp5);
+            config.data.datasets[4].data.push(data.temp6);
+            lineChart.update();
+        }
+
+    });
+</script>
+ <script>
+            document.getElementById("sejour_on").style.display = "none";
+            document.getElementById("sejour_off").style.display = "none";
+            document.getElementById("chambre1_on").style.display = "none";
+            document.getElementById("chambre1_off").style.display = "none";
+            document.getElementById("chambre2_on").style.display = "none";
+            document.getElementById("chambre2_off").style.display = "none";
+            document.getElementById("chambre3_on").style.display = "none";
+            document.getElementById("chambre3_off").style.display = "none";
+            document.getElementById("cuisine_on").style.display = "none";
+            document.getElementById("cuisine_off").style.display = "none";
+            setInterval('load_alarms()', 2000);
+    function load_alarms(){
+      var xhr = new XMLHttpRequest();
+         xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Runs when the request is successful
+                 console.log(JSON.stringify(xhr.responseText));
+                 data = JSON.parse(xhr.responseText);
+                 document.getElementById("temp_sejour").innerHTML = data.temp1;
+                 document.getElementById("temp_chambre").innerHTML = data.temp2;
+                 document.getElementById("temp_chambre2").innerHTML = data.temp3;
+                 document.getElementById("temp_chambre3").innerHTML = data.temp4;
+                 document.getElementById("temp_cuisine").innerHTML = data.temp5;
+                 var state_sejour = data.state_sejour
+                 var state_chambre1 = data.state_chambre1
+                 var state_chambre2 = data.state_chambre2
+                 var state_chambre3 = data.state_chambre3
+                 var state_cuisine = data.state_cuisine
+                 var xsejour_on = document.getElementById("sejour_on");
+                 var xsejour_off = document.getElementById("sejour_off");
+                 var xchambre1_on = document.getElementById("chambre1_on");
+                 var xchambre1_off = document.getElementById("chambre1_off");
+                 var xchambre2_on = document.getElementById("chambre2_on");
+                 var xchambre2_off = document.getElementById("chambre2_off");
+                 var xchambre3_on = document.getElementById("chambre3_on");
+                 var xchambre3_off = document.getElementById("chambre3_off");
+                 var xcuisine_on = document.getElementById("cuisine_on");
+                 var xcuisine_off = document.getElementById("cuisine_off");
+                 if (state_sejour == "0") {
+                    xsejour_on.style.display = "none";
+                    xsejour_off.style.display = "block";
+                 }
+                 if (state_sejour == "1"){
+					xsejour_on.style.display = "block";
+					xsejour_off.style.display = "none";
+				 }
+				 if (state_chambre1 == "0") {
+                    xchambre1_on.style.display = "none";
+                    xchambre1_off.style.display = "block";
+                 }
+                 if (state_chambre1 == "1"){
+					xchambre1_on.style.display = "block";
+					xchambre1_off.style.display = "none";
+				 }
+				 if (state_chambre2 == "0") {
+                    xchambre2_on.style.display = "none";
+                    xchambre2_off.style.display = "block";
+                 }
+                 if (state_chambre2 == "1"){
+					xchambre2_on.style.display = "block";
+					xchambre2_off.style.display = "none";
+				 }
+				 if (state_chambre3 == "0") {
+                    xchambre3_on.style.display = "none";
+                    xchambre3_off.style.display = "block";
+                 }
+                 if (state_chambre3 == "1"){
+					xchambre3_on.style.display = "block";
+					xchambre3_off.style.display = "none";
+				 }
+				 if (state_cuisine == "0") {
+                    xcuisine_on.style.display = "none";
+                    xcuisine_off.style.display = "block";
+                 }
+                 if (state_cuisine == "1"){
+					xcuisine_on.style.display = "block";
+					xcuisine_off.style.display = "none";
+				 }
+            }  else {
+                        console.log(JSON.stringify(xhr.responseText));
+            }
+        };
+        xhr.open('GET', '/ON_OFF');
+        xhr.send();
+     }
+   </script>
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Projet BTS SN IR 2020
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+    <!-- Bootstrap -->
+    <script src="../static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></scriptscript>
+    <!-- FastClick -->
+    <script src="../static/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../static/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../static/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../static/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../static/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../static/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../static/vendors/Flot/jquery.flot.js"></script>
+    <script src="../static/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../static/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../static/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../static/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../static/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../static/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../static/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../static/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../static/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../static/vendors/moment/min/moment.min.js"></script>
+    <script src="../static/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../static/build/js/custom.min.js"></script>
+
+   <!-- <script type="text/javascript">
+    const xhr = new XMLHttpRequest();
+
+      setInterval('load_room', 1000);
+      function load_room()
+      {
+        $('#temp_room').load('temproom.html');
+      }
+      </script>-->
+    </div>
+      </div>
+    </div>
+  </body>
+</html>
